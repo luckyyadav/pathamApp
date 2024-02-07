@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-content
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    "
+  >
+    <h3>Staff Attendance</h3>
+
+    <mat-card-content style="display: flex; gap: 1rem">
+      <!-- <mat-form-field> -->
+      
+      <!-- </mat-form-field> -->
+
+      <button
+        mat-stroked-button
+        color="primary"
+        ng-if="subscriptionPermission == 1"
+        ng-click="open_add_item_group();"
+      >
+        Take Attendance
+      </button>
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="staffAttendList.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="staffAttendList"
+    [dataColumns]="dataColumns"
+  >
+  </app-mat-tablelist>
+</ng-container>

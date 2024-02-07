@@ -1,0 +1,248 @@
+<mat-card>
+  <mat-card-content style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    ">
+    <h3>&nbsp;Inventory:&nbsp;Item Groups</h3>
+
+    <mat-card-content style="display: flex; gap: 1rem">
+      <!-- <mat-form-field> -->
+      <input matInput placeholder="Search by Company Item name,Created by Type...." #input type="text"
+        name="table_search" ng-model="searchText" placeholder="Search" />
+      <!-- </mat-form-field> -->
+
+      <!-- <button (click)="toggleItemsModal()" mat-raised-button color="primary">
+        <mat-icon
+        [ngStyle]="{ color: 'white' }"
+        aria-hidden="false"
+        aria-label="Example addcircle icon"
+        fontIcon="addcircle"
+        ></mat-icon>
+        Item 
+      </button> -->
+
+
+      <!-- <c-modal
+        id="itemsModal"
+        [visible]="visible"
+        (visibleChange)="handleItemsModalChange($event)"
+        size="lg"
+        >
+            <c-modal-header>
+                <h5 cModalTitle>Add Item</h5>
+                <button (click)="toggleItemsModal()" cButtonClose></button>
+            </c-modal-header>
+            <c-modal-body>
+             
+                <form
+                    cForm
+                    [formGroup]="itemsForm"
+                    [gutter]="3"
+                    cForm
+                    cRow
+                    novalidate
+                    (ngSubmit)="onSubmit()"
+                >
+                    <c-col [md]="6" *ngIf="itemsForm.controls['itemCode'] as ctrl">
+                        <label cLabel for="course">Item Code</label>
+                        <input
+                            cFormControl
+                            id="itemCode"
+                            formControlName="itemCode"
+                            placeholder="Item Code"
+                            autocomplete="off"
+                            [autofocus]="true"
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['isService'] as ctrl">
+                        <label cLabel for="department">Is Service</label>
+                        <input
+                            cFormControl
+                            id="isService"
+                            formControlName="isService"
+                            placeholder="Select Yes or No"
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['itemName'] as ctrl">
+                        <label cLabel for="className">Item Name</label>
+                        <input
+                            cFormControl
+                            id="itemName"
+                            formControlName="itemName"
+                            placeholder="Item Name"
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['category'] as ctrl">
+                        <label cLabel for="classStartDate">Category*</label>
+                        <input
+                            cFormControl
+                            id="category"
+                            formControlName="category"
+                            placeholder="Select a Category"
+                            required
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['subCategory'] as ctrl">
+                        <label cLabel for="classEndDate">Sub Category*</label>
+                        <input
+                            cFormControl
+                            id="subCategory"
+                            formControlName="subCategory"
+                            placeholder="Select a Sub Category"
+                            autocomplete="off"
+                            required
+                        />
+                    </c-col>
+
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['location'] as ctrl">
+                        <label cLabel for="board">Location* 101</label>
+                        <input
+                            cFormControl
+                            id="location"
+                            formControlName="location"
+                            placeholder="Location"
+                            autocomplete="off"
+                            required
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['pricePerUnit'] as ctrl">
+                        <label cLabel for="board">Price Per Unit</label>
+                        <input
+                            cFormControl
+                            id="pricePerUnit"
+                            formControlName="pricePerUnit"
+                            placeholder="Price Per Unit"
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['pricePerUnit'] as ctrl">
+                        <label cLabel for="board">Price Per Unit</label>
+                        <input
+                            cFormControl
+                            id="pricePerUnit"
+                            formControlName="pricePerUnit"
+                            placeholder="Price Per Unit"
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    
+                    <c-col [md]="6" *ngIf="itemsForm.controls['quantity'] as ctrl">
+                        <label cLabel for="board">Quantity*</label>
+                        <input
+                            cFormControl
+                            id="quantity"
+                            formControlName="quantity"
+                            placeholder="Quantity"
+                            autocomplete="off"
+                            required
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['reOrderLevel'] as ctrl">
+                        <label cLabel for="board">Re-Order-Level</label>
+                        <input
+                            cFormControl
+                            id="reOrderLevel"
+                            formControlName="reOrderLevel"
+                            placeholder="Re-Order_level"
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['modelName'] as ctrl">
+                        <label cLabel for="board">Model Name</label>
+                        <input
+                            cFormControl
+                            id="modelName"
+                            formControlName="modelName"
+                            placeholder="Model Name"
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    <c-col [md]="4" *ngIf="itemsForm.controls['isForSale'] as ctrl">
+                        <label cFormCheckLabel custom for="accept">Is for sales</label>
+                        <input
+                            cFormCheckInput
+                            type="checkbox"
+                            id="isForSale"
+                            formControlName="isForSale"
+                            required
+                            />
+                    </c-col>
+
+                    <c-col [md]="4" *ngIf="itemsForm.controls['isSerialNo'] as ctrl">
+                        <label cFormCheckLabel custom for="accept">Does this item has serial no. ? </label>
+                        <input
+                            cFormCheckInput
+                            type="checkbox"
+                            id="isSerialNo"
+                            formControlName="isSerialNo"
+                            required
+                            />
+                    </c-col>
+
+                    <c-col [md]="4" *ngIf="itemsForm.controls['serialNumber'] as ctrl">
+                        <label cLabel for="board">Serial Number</label>
+                        <input
+                            cFormControl
+                            id="serialNumber"
+                            formControlName="serialNumber"
+                            placeholder="Serial Number"
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    <c-col [md]="6" *ngIf="itemsForm.controls['description'] as ctrl">
+                        <label cLabel for="board">Description</label>
+                        <input
+                            cFormControl
+                            id="description"
+                            formControlName="description"
+                            placeholder="Description"
+                            autocomplete="off"
+                        />
+                    </c-col>
+
+                    <hr />
+
+                    <c-col [xs]="12">
+                        <c-button-group>
+                            <button (click)="onSubmit()" mat-raised-button color="primary">
+                                Submit
+                            </button>                  
+                        </c-button-group>
+                    </c-col>
+                </form>
+
+
+            </c-modal-body>
+        </c-modal> -->
+
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="supplierAll.length > 0">
+  <app-mat-tablelist [AllTableData]="supplierAll" [dataColumns]="dataColumns">
+  </app-mat-tablelist>
+</ng-container>
+<!-- 
+<app-dynamic-form
+  [formConfig]="dynamicFormConfig"
+  (submitForm)="onSubmit($event)"
+  (resetForm)="onReset()"
+></app-dynamic-form> -->

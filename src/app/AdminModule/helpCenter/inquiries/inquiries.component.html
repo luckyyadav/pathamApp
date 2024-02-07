@@ -1,0 +1,9 @@
+<div *ngIf="AllInquiries?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllInquiries"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{
+        component: 'Help Center: Inquiries',       
+      }"
+  ></app-mat-tablelist>
+</div>

@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-content
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    "
+  >
+    <h3>Shifts</h3>
+
+    <mat-card-content style="display: flex; gap: 1rem">
+      <!-- <mat-form-field> -->
+      <input
+        matInput
+        placeholder="Search"
+        #input
+        type="text"
+        name="table_search"
+        ng-model="searchText"
+        placeholder="Search"
+      />
+      <!-- </mat-form-field> -->
+
+      <button
+        mat-stroked-button
+        color="primary"
+        ng-if="subscriptionPermission == 1"
+        ng-click="open_add_item_group();"
+      >
+        Add
+      </button>
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="ShiftsList.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="ShiftsList"
+    [dataColumns]="dataColumns"
+  >
+  </app-mat-tablelist>
+</ng-container>

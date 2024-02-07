@@ -1,0 +1,27 @@
+<mat-card>
+	<mat-card-content
+		style="
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;"
+		>
+		<h3>&nbsp;Library:&nbsp;Issued Item Details</h3>
+		<div>
+			<button mat-raised-button color="primary">
+				Issue New Item
+			</button>
+			<button mat-raised-button color="primary">
+				Search Student History
+			</button>
+		</div>
+	</mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="dataSource.length > 0">
+    <app-mat-tablelist
+      [AllTableData]="dataSource"
+      [dataColumns]="issueDataColumns"
+    >
+    </app-mat-tablelist>
+</ng-container>

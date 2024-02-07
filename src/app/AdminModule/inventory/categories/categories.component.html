@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-content
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    "
+  >
+    <h3>&nbsp;Inventory:&nbsp;Categories</h3>
+
+    <mat-card-content style="display: flex; gap: 1rem">
+      <!-- <mat-form-field> -->
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Search by Company Item name,Created by Type...."
+        #input
+        type="text"
+        name="table_search"
+        ng-model="searchText"
+        placeholder="Search"
+      />
+      <!-- </mat-form-field> -->
+
+      <button
+        mat-stroked-button
+        color="primary"
+        ng-if="subscriptionPermission == 1"
+        (click)="subCatToggle()"
+      >
+        <mat-icon *ngIf="subcat">arrow_back</mat-icon>
+        <span *ngIf="!subcat"> Sub Categories</span>
+      </button>
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="inv_category.length > 0 && !subcat">
+  <app-mat-tablelist
+    [AllTableData]="dataSource"
+    [dataColumns]="catDataColumns"
+  >
+  </app-mat-tablelist>
+</ng-container>
+
+<ng-container *ngIf="inv_sub_category.length > 0 && subcat">
+  <app-mat-tablelist
+    [AllTableData]="dataSource"
+    [dataColumns]="subCatDataColumns"
+  >
+  </app-mat-tablelist>
+</ng-container>

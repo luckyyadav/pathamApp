@@ -1,0 +1,310 @@
+<!-- <form [formGroup]="dynamicForms" (ngSubmit)="onSubmitForm()">
+  <ng-container *ngFor="let field of formConfig">
+    <div *ngIf="field.type === 'text' || field.type === 'number'">
+      <label for="{{ field.name }}">{{ field.label }}</label>
+      <input
+        type="{{ field.type }}"
+        id="{{ field.name }}"
+        formControlName="{{ field.name }}"
+        placeholder="{{ field.placeholder || '' }}"
+      />
+      <div *ngIf="dynamicForms.get(field.name)?.hasError('required')">
+        {{ field.label }} is required
+      </div>
+    </div>
+  </ng-container>
+
+  <button type="button" (click)="onResetForm()">Reset</button>
+  <button type="submit">Submit</button>
+</form> -->
+
+<c-modal
+  id="booksModal"
+  [visible]="visible"
+  (visibleChange)="handleBooksModalChange($event)"
+  size="lg"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Add Books</h5>
+    <button (click)="toggleBooksModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <!-- Modal Form -->
+    <form
+      cForm
+      [formGroup]="dynamicForms"
+      [gutter]="3"
+      cForm
+      cRow
+      novalidate
+      (ngSubmit)="onSubmit()"
+    >
+      <ng-container *ngFor="let field of formConfig">
+        <c-col
+          [md]="4"
+          *ngIf="field.type === 'text' || field.type === 'number'"
+        >
+          <label cLabel for="{{ field.name }}">{{ field.label }}</label>
+          <input
+            cFormControl
+            type="{{ field.type }}"
+            id="{{ field.name }}"
+            formControlName="{{ field.name }}"
+            placeholder="{{ field.placeholder || '' }}"
+            [autofocus]="true"
+            [valid]="
+              field.touched && field.valid
+                ? true
+                : (submitted || field.touched) && field.invalid
+                ? false
+                : undefined
+            "
+          />
+          <div *ngIf="dynamicForms.get(field.name)?.hasError('required')">
+            {{ field.label }} is required
+          </div>
+        </c-col>
+      </ng-container>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['libraryType'] as ctrl">
+        <label cLabel for="libraryType">Library Type *</label>
+        <input
+          cFormControl
+          id="libraryType"
+          formControlName="libraryType"
+          placeholder=""
+          autocomplete="off"
+          required
+          [autofocus]="true"
+          [valid]="
+            ctrl.touched && ctrl.valid
+              ? true
+              : (submitted || ctrl.touched) && ctrl.invalid
+              ? false
+              : undefined
+          "
+        />
+        <c-form-feedback
+          *ngIf="submitted || ctrl.invalid"
+          [valid]="!(submitted || ctrl.invalid)"
+        >
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">Library Type is required</div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['itemDetails'] as ctrl">
+        <label cLabel for="itemDetails">Item Details *</label>
+        <input
+          cFormControl
+          id="itemDetails"
+          formControlName="itemDetails"
+          placeholder=""
+          autocomplete="off"
+          required
+          [valid]="
+            ctrl.touched && ctrl.valid
+              ? true
+              : (submitted || ctrl.touched) && ctrl.invalid
+              ? false
+              : undefined
+          "
+        />
+        <c-form-feedback
+          *ngIf="submitted || ctrl.invalid"
+          [valid]="!(submitted || ctrl.invalid)"
+        >
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">Item Details is required</div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['code'] as ctrl">
+        <label cLabel for="code">Code *</label>
+        <input
+          cFormControl
+          id="code"
+          formControlName="code"
+          placeholder="Item Code"
+          autocomplete="off"
+          required
+          [valid]="
+            ctrl.touched && ctrl.valid
+              ? true
+              : (submitted || ctrl.touched) && ctrl.invalid
+              ? false
+              : undefined
+          "
+        />
+        <c-form-feedback
+          *ngIf="submitted || ctrl.invalid"
+          [valid]="!(submitted || ctrl.invalid)"
+        >
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">Code is required</div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['volume'] as ctrl">
+        <label cLabel for="volume">Volume</label>
+        <input
+          cFormControl
+          id="volume"
+          formControlName="volume"
+          placeholder="Volume"
+          autocomplete="off"
+        />
+      </c-col>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['title'] as ctrl">
+        <label cLabel for="title">Title *</label>
+        <input
+          cFormControl
+          id="title"
+          formControlName="title"
+          placeholder="Title"
+          autocomplete="off"
+          required
+          [valid]="
+            ctrl.touched && ctrl.valid
+              ? true
+              : (submitted || ctrl.touched) && ctrl.invalid
+              ? false
+              : undefined
+          "
+        />
+        <c-form-feedback
+          *ngIf="submitted || ctrl.invalid"
+          [valid]="!(submitted || ctrl.invalid)"
+        >
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">Title is required</div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['description'] as ctrl">
+        <label cLabel for="description">Description</label>
+        <input
+          cFormControl
+          id="description"
+          formControlName="description"
+          placeholder="Description"
+          autocomplete="off"
+        />
+      </c-col>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['author'] as ctrl">
+        <label cLabel for="author">Author *</label>
+        <input
+          cFormControl
+          id="author"
+          formControlName="author"
+          placeholder="Author"
+          autocomplete="off"
+          required
+          [valid]="
+            ctrl.touched && ctrl.valid
+              ? true
+              : (submitted || ctrl.touched) && ctrl.invalid
+              ? false
+              : undefined
+          "
+        />
+        <c-form-feedback
+          *ngIf="submitted || ctrl.invalid"
+          [valid]="!(submitted || ctrl.invalid)"
+        >
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">Author is required</div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['quantity'] as ctrl">
+        <label cLabel for="quantity">Quantity *</label>
+        <input
+          cFormControl
+          id="quantity"
+          formControlName="quantity"
+          placeholder="Quantity"
+          autocomplete="off"
+          required
+          [valid]="
+            ctrl.touched && ctrl.valid
+              ? true
+              : (submitted || ctrl.touched) && ctrl.invalid
+              ? false
+              : undefined
+          "
+        />
+        <c-form-feedback
+          *ngIf="submitted || ctrl.invalid"
+          [valid]="!(submitted || ctrl.invalid)"
+        >
+          <ng-container *ngIf="ctrl.errors as errors">
+            <div *ngIf="errors['required']">Quantity is required</div>
+          </ng-container>
+        </c-form-feedback>
+      </c-col>
+
+      <c-col [md]="4" *ngIf="booksForm.controls['location'] as ctrl">
+        <label cLabel for="location">Location *</label>
+        <input
+          cFormControl
+          id="location"
+          formControlName="location"
+          placeholder=""
+          autocomplete="off"
+        />
+      </c-col>
+
+      <c-row class="mb-1">
+        <c-col *ngIf="booksForm.controls['accept'] as ctrl">
+          <c-form-check>
+            <input
+              cFormCheckInput
+              type="checkbox"
+              id="accept"
+              formControlName="accept"
+              required
+              [valid]="
+                ctrl.valid
+                  ? true
+                  : submitted && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <label cFormCheckLabel custom for="accept"
+              >I accept the terms of use</label
+            >
+            <c-form-feedback *ngIf="submitted && ctrl.invalid" [valid]="false">
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">
+                  You have to accept our Terms and Conditions
+                </div>
+              </ng-container>
+            </c-form-feedback>
+          </c-form-check>
+        </c-col>
+      </c-row>
+      <hr />
+      <c-col [xs]="12">
+        <c-button-group>
+          <button (click)="onSubmit()" mat-raised-button color="primary">
+            Submit
+          </button>
+          <button (click)="onReset()" mat-raised-button color="accent">
+            Reset
+          </button>
+        </c-button-group>
+      </c-col>
+    </form>
+
+    <!--  -->
+  </c-modal-body>
+</c-modal>

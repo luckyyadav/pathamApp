@@ -1,0 +1,9 @@
+<div *ngIf="allHomework?.length > 0">
+    <app-mat-tablelist
+      [AllTableData]="allHomework"
+      [dataColumns]="homeworkDataColumns"
+      [componentDetails]="{
+          component: 'Homework',
+        }"
+    ></app-mat-tablelist>
+</div>

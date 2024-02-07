@@ -1,0 +1,10 @@
+<div *ngIf="AllExpenses?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllExpenses"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{
+      component: 'Expenses',
+      addProgramBtn: 'Add Expenses'
+    }"
+  ></app-mat-tablelist>
+</div>

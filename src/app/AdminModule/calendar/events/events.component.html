@@ -1,0 +1,10 @@
+<div *ngIf="AllEvents?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllEvents"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{
+      component: 'Events',
+      addProgramBtn: 'Add Events'
+    }"
+  ></app-mat-tablelist>
+</div>

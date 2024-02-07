@@ -1,0 +1,10 @@
+<!-- Table -->
+
+<ng-container *ngIf="allInvoice?.length > 0">
+    <app-mat-tablelist
+      [AllTableData]="allInvoice"
+      [dataColumns]="invoiceDataColumns"
+      [componentDetails]="{ component: 'Subscription: Invoice' }"
+    >
+    </app-mat-tablelist>
+</ng-container>

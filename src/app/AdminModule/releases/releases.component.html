@@ -1,0 +1,10 @@
+<!-- Table -->
+
+<ng-container *ngIf="allReleases?.length > 0">
+    <app-mat-tablelist
+      [AllTableData]="allReleases"
+      [dataColumns]="releasesDataColumns"
+      [componentDetails]="{ component: 'Releases' }"
+    >
+    </app-mat-tablelist>
+</ng-container>

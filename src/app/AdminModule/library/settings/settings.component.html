@@ -1,0 +1,235 @@
+<mat-card>
+	<mat-card-content
+		style="
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;"
+		>
+		<h3>&nbsp;Library Settings:&nbsp;Issue Settings</h3>
+		<button (click)="toggleSettingModal()" mat-raised-button color="primary">
+			<mat-icon
+			  [ngStyle]="{ color: 'white' }"
+			  aria-hidden="false"
+			  aria-label="Example addcircle icon"
+			  fontIcon="addcircle"
+			></mat-icon>
+			Issue Settings
+		</button>
+  </mat-card-content>
+	<c-modal
+      id="settingModal"
+      [visible]="visible"
+      (visibleChange)="handleSettingModalChange($event)"
+      size="lg"
+    >
+      <c-modal-header>
+        <h5 cModalTitle>Add Issue Settings</h5>
+        <button (click)="toggleSettingModal()" cButtonClose></button>
+      </c-modal-header>
+      <c-modal-body>
+        <!-- Modal Form -->
+        <form
+          cForm
+          [formGroup]="issueSettingForm"
+          [gutter]="3"
+          cForm
+          cRow
+          novalidate
+          (ngSubmit)="onSubmit()"
+        >
+          <c-col [md]="4" *ngIf="issueSettingForm.controls['categoryType'] as ctrl">
+            <label cLabel for="categoryType">Category Type</label>
+            <input
+              cFormControl
+              id="categoryType"
+              formControlName="categoryType"
+              placeholder=""
+              autocomplete="off"
+              required
+              [autofocus]="true"
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Category Type is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="issueSettingForm.controls['itemDetails'] as ctrl">
+            <label cLabel for="itemDetails">Item Details</label>
+            <input
+              cFormControl
+              id="itemDetails"
+              formControlName="itemDetails"
+              placeholder=""
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Item Details is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="issueSettingForm.controls['maxIssueLimitDays'] as ctrl">
+            <label cLabel for="maxIssueLimitDays">Max Issue Limit Days</label>
+            <input
+              cFormControl
+              id="maxIssueLimitDays"
+              formControlName="maxIssueLimitDays"
+              placeholder="Default issue limit"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+            <ng-container *ngIf="ctrl.errors as errors">
+              <div *ngIf="errors['required']">Max Issue Limit Days is required</div>
+            </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="issueSettingForm.controls['maxIssueToStudent'] as ctrl">
+            <label cLabel for="maxIssueToStudent">Max Issue To Student</label>
+            <input
+              cFormControl
+              id="maxIssueToStudent"
+              formControlName="maxIssueToStudent"
+              placeholder="Maximum allowed at a time"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+            <ng-container *ngIf="ctrl.errors as errors">
+              <div *ngIf="errors['required']">Max Issue To Student is required</div>
+            </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="issueSettingForm.controls['fineType'] as ctrl">
+            <label cLabel for="fineType">Fine Type</label>
+            <input
+              cFormControl
+              id="fineType"
+              formControlName="fineType"
+              placeholder=""
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+            <ng-container *ngIf="ctrl.errors as errors">
+              <div *ngIf="errors['required']">Fine Type is required</div>
+            </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-row class="mb-1">
+            <c-col *ngIf="issueSettingForm.controls['accept'] as ctrl">
+              <c-form-check>
+                <input
+                  cFormCheckInput
+                  type="checkbox"
+                  id="accept"
+                  formControlName="accept"
+                  required
+                  [valid]="
+                    ctrl.valid
+                      ? true
+                      : submitted && ctrl.invalid
+                      ? false
+                      : undefined
+                  "
+                />
+                <label cFormCheckLabel custom for="accept"
+                  >I accept the terms of use</label
+                >
+                <c-form-feedback
+                  *ngIf="submitted && ctrl.invalid"
+                  [valid]="false"
+                >
+                  <ng-container *ngIf="ctrl.errors as errors">
+                    <div *ngIf="errors['required']">
+                      You have to accept our Terms and Conditions
+                    </div>
+                  </ng-container>
+                </c-form-feedback>
+              </c-form-check>
+            </c-col>
+          </c-row>
+          <hr />
+          <c-col [xs]="12">
+            <c-button-group>
+              <button (click)="onSubmit()" mat-raised-button color="primary">
+                Submit
+              </button>
+              <button (click)="onReset()" mat-raised-button color="accent">
+                Reset
+              </button>
+            </c-button-group>
+          </c-col>
+        </form>
+
+        <!--  -->
+      </c-modal-body>
+  </c-modal>
+	
+</mat-card>
+
+<ng-container *ngIf="dataSource.length > 0">
+    <app-mat-tablelist
+      [AllTableData]="dataSource"
+      [dataColumns]="settingIssueDataColumns"
+    >
+    </app-mat-tablelist>
+</ng-container>

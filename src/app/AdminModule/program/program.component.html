@@ -1,0 +1,10 @@
+<!-- Table -->
+
+<ng-container *ngIf="allPrograms?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="allPrograms"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{ component: 'Program', addProgramBtn: 'Add Program' }"
+  >
+  </app-mat-tablelist>
+</ng-container>

@@ -1,0 +1,25 @@
+.webContainer{
+    display: flex;
+    justify-content: space-between;
+    gap:1rem;
+    margin-top: 1rem;
+
+    .weblist{
+        width: 30%;
+        .list-group-item{
+            background-color: white;
+            &:hover {
+                background-color: #8c9aeb ; 
+                color:white;
+                cursor: pointer;
+              }
+              &.active{
+                color:white;
+                background-color: #3F51B5; 
+              }
+        }
+    }
+    .editArea{
+        width:70%;
+    }
+} 

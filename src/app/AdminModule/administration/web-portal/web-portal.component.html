@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-content
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    "
+  >
+    <h4>Manage School Page</h4>
+
+    <mat-card-content style="display: flex; gap: 1rem">
+      <!-- </mat-form-field> -->
+      <ng-container>
+        <button mat-stroked-button color="primary">Web Portal Link</button>
+      </ng-container>
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+<div class="webContainer">
+  <mat-card class="weblist">
+    <!-- *ngFor="let item of items" -->
+
+    <div class="card-block">
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let item of listItem"
+          (click)="selectItem(item.itemName)"
+          routerLinkActive="active"
+          routerLink="{{ item.routeLink }}"
+        >
+          {{ item.itemName }}
+        </li>
+      </ul>
+    </div>
+  </mat-card>
+  <mat-card class="editArea">
+    <router-outlet></router-outlet>
+  </mat-card>
+</div>

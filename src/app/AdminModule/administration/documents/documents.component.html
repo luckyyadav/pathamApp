@@ -1,0 +1,8 @@
+<div *ngIf="AllDocumentsList?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllDocumentsList"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{component: ' Documents: Settings',}"
+  ></app-mat-tablelist>
+</div>
+

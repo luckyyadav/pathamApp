@@ -1,0 +1,19 @@
+<div class="schoolTitle">
+  <div>
+    <h4>School Video</h4>
+  </div>
+  <button
+    mat-stroked-button
+    color="secondary"
+    ng-click="open_add_item_group();"
+  >
+    Add Video
+  </button>
+</div>
+
+<div class="tableContainer" *ngIf="AllVideoList?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllVideoList"
+    [dataColumns]="dataColumns"
+  ></app-mat-tablelist>
+</div>

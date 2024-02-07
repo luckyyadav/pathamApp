@@ -1,0 +1,9 @@
+<div *ngIf="allTestPaper?.length > 0">
+    <app-mat-tablelist
+      [AllTableData]="allTestPaper"
+      [dataColumns]="testpaperDataColumns"
+      [componentDetails]="{
+          component: 'Test Paper',
+        }"
+    ></app-mat-tablelist>
+</div>

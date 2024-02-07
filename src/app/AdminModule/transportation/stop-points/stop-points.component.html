@@ -1,0 +1,10 @@
+<ng-container *ngIf="routePointsList.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="routePointsList"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{
+      component: 'Transportation: Route Points',       
+    }"
+  >
+  </app-mat-tablelist>
+</ng-container>

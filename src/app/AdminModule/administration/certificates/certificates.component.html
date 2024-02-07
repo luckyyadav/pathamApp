@@ -1,0 +1,31 @@
+<div *ngIf="AllCertificateList?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllCertificateList"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{component: 'Certificates',
+  }"
+  ></app-mat-tablelist>
+</div>
+<mat-card>
+  <mat-card-content>
+    <p>
+      Here you can personalize the certificates that will be displayed in the
+      students section where you can print the selected certificates. We have
+      three types of certificate category i.e. TC, CC, and SLC. Certificate
+      customization has these
+    </p>
+    <strong> Stages:</strong>
+    <ol>
+      <li>
+        Check the box next to the name of the certificate you would like to see
+        displayed in the students section.
+      </li>
+      <li>
+        Click "Next/Skip" button according to your choices. You can skip any
+        category if you found your required certificate is not listed in that
+        list.
+      </li>
+      <li>Finally click "Save Setting" button to save your selection.</li>
+    </ol>
+  </mat-card-content>
+</mat-card>

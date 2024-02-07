@@ -1,0 +1,148 @@
+<mat-card>
+    <mat-card-content
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      "
+    >
+      <h3>&nbsp;Sections</h3>
+      
+      <mat-card-content style="display: flex; gap: 1rem">
+        <!-- <mat-form-field> -->
+        <input
+          matInput
+          placeholder="Search by Company Item name,Created by Type...."
+          #input
+          type="text"
+          name="table_search"
+          ng-model="searchText"
+          placeholder="Search"
+        />
+        <button (click)="toggleSectionsModal()" mat-raised-button color="primary">
+            <mat-icon
+            [ngStyle]="{ color: 'white' }"
+            aria-hidden="false"
+            aria-label="Example addcircle icon"
+            fontIcon="addcircle"
+            ></mat-icon>
+            Sections
+        </button>
+        <!-- </mat-form-field> -->
+        <c-modal
+        id="sectionsModal"
+        [visible]="visible"
+        (visibleChange)="handleSectionsModalChange($event)"
+        size="lg"
+        >
+            <c-modal-header>
+                <h5 cModalTitle>Add Section</h5>
+                <button (click)="toggleSectionsModal()" cButtonClose></button>
+            </c-modal-header>
+            <c-modal-body>
+                <!-- Modal Form -->
+                <form
+                cForm
+                [formGroup]="sectionsForm"
+                [gutter]="3"
+                cForm
+                cRow
+                novalidate
+                (ngSubmit)="onSubmit()"
+                >
+                <c-col [md]="4" *ngIf="sectionsForm.controls['class'] as ctrl">
+                    <label cLabel for="class">Class *</label>
+                    <input
+                    cFormControl
+                    id="class"
+                    formControlName="class"
+                    placeholder=""
+                    autocomplete="off"
+                    required
+                    [autofocus]="true"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="sectionsForm.controls['section'] as ctrl">
+                    <label cLabel for="section">Section *</label>
+                    <input
+                    cFormControl
+                    id="section"
+                    formControlName="section"
+                    placeholder="Section"
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="sectionsForm.controls['teacher'] as ctrl">
+                    <label cLabel for="teacher">Teacher</label>
+                    <input
+                    cFormControl
+                    id="teacher"
+                    formControlName="teacher"
+                    placeholder=""
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-row class="mb-1">
+                    <c-col *ngIf="sectionsForm.controls['accept'] as ctrl">
+                    <c-form-check>
+                        <input
+                        cFormCheckInput
+                        type="checkbox"
+                        id="accept"
+                        formControlName="accept"
+                        required
+                        [valid]="
+                            ctrl.valid
+                            ? true
+                            : submitted && ctrl.invalid
+                            ? false
+                            : undefined
+                        "
+                        />
+                        <label cFormCheckLabel custom for="accept"
+                        >I accept the terms of use</label
+                        >
+                        <c-form-feedback
+                        *ngIf="submitted && ctrl.invalid"
+                        [valid]="false"
+                        >
+                        <ng-container *ngIf="ctrl.errors as errors">
+                            <div *ngIf="errors['required']">
+                            You have to accept our Terms and Conditions
+                            </div>
+                        </ng-container>
+                        </c-form-feedback>
+                    </c-form-check>
+                    </c-col>
+                </c-row>
+                <hr />
+                <c-col [xs]="12">
+                    <c-button-group>
+                    <button (click)="onSubmit()" mat-raised-button color="primary">
+                        Submit
+                    </button>
+                    <button (click)="onReset()" mat-raised-button color="accent">
+                        Reset
+                    </button>
+                    </c-button-group>
+                </c-col>
+                </form>
+
+                <!--  -->
+            </c-modal-body>
+        </c-modal>
+      </mat-card-content>
+    </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="dataSource?.length > 0">
+    <app-mat-tablelist
+    [AllTableData]="dataSource"
+    [dataColumns]="sectionsDataColumns"
+    >
+    </app-mat-tablelist>
+</ng-container>

@@ -1,0 +1,208 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$coreui-free-angular-admin-template-primary: mat.define-palette(
+  mat.$indigo-palette
+);
+$coreui-free-angular-admin-template-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$coreui-free-angular-admin-template-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$coreui-free-angular-admin-template-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $coreui-free-angular-admin-template-primary,
+      accent: $coreui-free-angular-admin-template-accent,
+      warn: $coreui-free-angular-admin-template-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($coreui-free-angular-admin-template-theme);
+
+/* You can add global styles to this file, and also import other style files */
+// If you want to override variables do it here
+@import 'variables';
+
+$enable-ltr: true;
+$enable-rtl: true;
+
+// Import styles with default layout.
+@import '@coreui/coreui/scss/coreui';
+
+// Import Chart.js custom tooltips styles
+@import '@coreui/chartjs/scss/coreui-chartjs';
+
+@import 'layout';
+
+// Some temp fixes
+@import 'fixes';
+
+// Prism.js
+@import 'examples';
+
+// If you want to add something do it here
+@import 'custom';
+
+.sidebar-brand-full {
+  margin: 10px 0;
+  width: 100%;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+.header.header-sticky {
+  z-index: 999;
+}
+
+/* Side bar theme change */
+.sidebar {
+  width: 14rem;
+}
+.sidebar:not(.sidebar-end) ~ * {
+  --cui-sidebar-occupy-start: 14rem;
+}
+
+//Sidebar padding
+.sidebar-nav .nav-link {
+  padding: 0.4rem 1rem !important;
+}
+//nav Childs Group padding
+.nav-group-items {
+  padding: 0 3rem !important;
+}
+
+.sidebar-nav {
+  background: #fff;
+  padding: 0 12px 0 8px;
+}
+.sidebar-toggler {
+  background: #fff;
+}
+.sidebar-nav .nav-link.active .nav-icon,
+.sidebar-nav .nav-link.active,
+.sidebar-nav .nav-link.active,
+.sidebar-nav .nav-icon {
+  color: #000;
+  letter-spacing: 0.5px;
+}
+.sidebar-nav .nav-link {
+  color: #000;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+.sidebar-nav .nav-link:hover,
+.sidebar-nav .nav-link.active {
+  color: #000;
+  background: #f0f3fb;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-nav .nav-link:hover .nav-icon,
+.sidebar-nav .nav-link:hover .nav-icon {
+  color: #000;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-nav .nav-group.show > .nav-group-toggle::after {
+  transform: rotate(180deg);
+  color: #000;
+
+  /*  content: "\002B"; */
+  content: '\2212';
+  font-size: 20px;
+  background-image: none;
+  line-height: 14px;
+}
+
+.sidebar-nav .nav-group-toggle::after {
+  color: #000;
+
+  content: '\002B';
+
+  font-size: 20px;
+  background-image: none;
+  line-height: 14px;
+}
+
+.sidebar-nav .nav-group.show .nav-group-toggle {
+  color: #000;
+  background: #f0f3fb;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-nav .nav-group .nav-group-items {
+  background: #f0f3fb;
+}
+
+.breadcrumb,
+.dropdown-item {
+  font-size: 14px;
+}
+.nav-link.nav-group-toggle + .nav-group-items .nav-link.active {
+  font-weight: 500;
+}
+.nav-link.nav-group-toggle + .nav-group-items .nav-link.active:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid black;
+  position: absolute;
+  left: 20%;
+}
+
+.togglrBTN .mdc-switch:enabled .mdc-switch__track::before,
+.togglrBTN
+  .mdc-switch.mdc-switch--unselected:enabled
+  .mdc-switch__handle::after {
+  background: red !important;
+}
+
+.togglrBTN .mdc-switch:enabled .mdc-switch__track::after,
+.togglrBTN .mdc-switch.mdc-switch--selected:enabled .mdc-switch__handle::after {
+  background: green !important;
+}
+
+.mat-mdc-paginator-range-label {
+  display: none;
+}
+.mat-custom-page[disabled] {
+  color: #fff !important;
+  height: 30px;
+  width: 44px;
+}
+
+button.mat-mini-fab.mat-custom-page {
+  border-radius: 50%;
+  text-align: center;
+  height: 30px;
+  width: 44px;
+}

@@ -1,0 +1,19 @@
+<div class="schoolTitle">
+  <div>
+    <h4>School Events</h4>
+  </div>
+  <button
+    mat-stroked-button
+    color="secondary"
+    ng-click="open_add_item_group();"
+  >
+    Add Event
+  </button>
+</div>
+
+<div class="tableContainer" *ngIf="AllEventList?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllEventList"
+    [dataColumns]="dataColumns"
+  ></app-mat-tablelist>
+</div>

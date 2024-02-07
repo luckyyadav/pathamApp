@@ -1,0 +1,225 @@
+<mat-card>
+    <mat-card-content
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      "
+    >
+      <h3>&nbsp;Subjects</h3>
+      
+      <mat-card-content style="display: flex; gap: 1rem">
+        <!-- <mat-form-field> -->
+        <input
+          matInput
+          placeholder="Search by Company Item name,Created by Type...."
+          #input
+          type="text"
+          name="table_search"
+          ng-model="searchText"
+          placeholder="Search"
+        />
+        <button (click)="toggleSubjectsModal()" mat-raised-button color="primary">
+            <mat-icon
+            [ngStyle]="{ color: 'white' }"
+            aria-hidden="false"
+            aria-label="Example addcircle icon"
+            fontIcon="addcircle"
+            ></mat-icon>
+            Subjects
+        </button>
+        <!-- </mat-form-field> -->
+        <c-modal
+        id="subjectsModal"
+        [visible]="visible"
+        (visibleChange)="handleSubjectsModalChange($event)"
+        size="lg"
+        >
+            <c-modal-header>
+                <h5 cModalTitle>Add Subject</h5>
+                <button (click)="toggleSubjectsModal()" cButtonClose></button>
+            </c-modal-header>
+            <c-modal-body>
+                <!-- Modal Form -->
+                <form
+                cForm
+                [formGroup]="subjectsForm"
+                [gutter]="3"
+                cForm
+                cRow
+                novalidate
+                (ngSubmit)="onSubmit()"
+                >
+                <c-col [md]="4" *ngIf="subjectsForm.controls['subjectName'] as ctrl">
+                    <label cLabel for="subjectName">Subject Name *</label>
+                    <input
+                    cFormControl
+                    id="subjectName"
+                    formControlName="subjectName"
+                    placeholder="Subject Name"
+                    autocomplete="off"
+                    required
+                    [autofocus]="true"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['subjectCode'] as ctrl">
+                    <label cLabel for="subjectCode">Subject Code</label>
+                    <input
+                    cFormControl
+                    id="subjectCode"
+                    formControlName="subjectCode"
+                    placeholder="Subject Code"
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['class'] as ctrl">
+                    <label cLabel for="class">Class *</label>
+                    <input
+                    cFormControl
+                    id="class"
+                    formControlName="class"
+                    placeholder=""
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['subjectCategory'] as ctrl">
+                    <label cLabel for="subjectCategory">Subject Category *</label>
+                    <input
+                    cFormControl
+                    id="subjectCategory"
+                    formControlName="subjectCategory"
+                    placeholder=""
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['passingMarks'] as ctrl">
+                    <label cLabel for="passingMarks">Passing Marks *</label>
+                    <input
+                    cFormControl
+                    id="passingMarks"
+                    formControlName="passingMarks"
+                    placeholder="Pass Grade"
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['fullMarks'] as ctrl">
+                    <label cLabel for="fullMarks">Full Marks *</label>
+                    <input
+                    cFormControl
+                    id="fullMarks"
+                    formControlName="fullMarks"
+                    placeholder="Final Grade"
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['subjectThumbnail'] as ctrl">
+                    <label cLabel for="subjectThumbnail">Subject Thumbnail</label>
+                    <input
+                    cFormControl
+                    id="subjectThumbnail"
+                    formControlName="subjectThumbnail"
+                    placeholder="Choose File"
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['marksType'] as ctrl">
+                    <label cLabel for="marksType">Marks Type</label>
+                    <input
+                    cFormControl
+                    id="marksType"
+                    formControlName="marksType"
+                    placeholder=""
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['subjectType'] as ctrl">
+                    <label cLabel for="subjectType">Subject Type *</label>
+                    <input
+                    cFormControl
+                    id="subjectType"
+                    formControlName="subjectType"
+                    placeholder=""
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-col [md]="4" *ngIf="subjectsForm.controls['subjectOrderInMarksheet'] as ctrl">
+                    <label cLabel for="subjectOrderInMarksheet">Subject order in Marksheet</label>
+                    <input
+                    cFormControl
+                    id="subjectOrderInMarksheet"
+                    formControlName="subjectOrderInMarksheet"
+                    placeholder="e.g 1.."
+                    autocomplete="off"
+                    />
+                </c-col>
+
+                <c-row class="mb-1">
+                    <c-col *ngIf="subjectsForm.controls['accept'] as ctrl">
+                    <c-form-check>
+                        <input
+                        cFormCheckInput
+                        type="checkbox"
+                        id="accept"
+                        formControlName="accept"
+                        required
+                        [valid]="
+                            ctrl.valid
+                            ? true
+                            : submitted && ctrl.invalid
+                            ? false
+                            : undefined
+                        "
+                        />
+                        <label cFormCheckLabel custom for="accept"
+                        >I accept the terms of use</label
+                        >
+                        <c-form-feedback
+                        *ngIf="submitted && ctrl.invalid"
+                        [valid]="false"
+                        >
+                        <ng-container *ngIf="ctrl.errors as errors">
+                            <div *ngIf="errors['required']">
+                            You have to accept our Terms and Conditions
+                            </div>
+                        </ng-container>
+                        </c-form-feedback>
+                    </c-form-check>
+                    </c-col>
+                </c-row>
+                <hr />
+                <c-col [xs]="12">
+                    <c-button-group>
+                    <button (click)="onSubmit()" mat-raised-button color="primary">
+                        Submit
+                    </button>
+                    <button (click)="onReset()" mat-raised-button color="accent">
+                        Reset
+                    </button>
+                    </c-button-group>
+                </c-col>
+                </form>
+
+                <!--  -->
+            </c-modal-body>
+        </c-modal>
+      </mat-card-content>
+    </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="dataSource?.length > 0">
+    <app-mat-tablelist
+    [AllTableData]="dataSource"
+    [dataColumns]="subjectsDataColumns"
+    >
+    </app-mat-tablelist>
+</ng-container>

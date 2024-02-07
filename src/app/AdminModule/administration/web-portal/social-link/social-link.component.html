@@ -1,0 +1,86 @@
+<div class="schoolTitle">
+  <div class="row">
+    <div class="col-md-8">
+      <h4 class="card-title ng-binding">School Website</h4>
+    </div>
+  </div>
+</div>
+
+<div class="inputContainer">
+  <form
+    class="form-horizontal ng-pristine ng-valid ng-valid-required"
+    name="editemail"
+    role="form"
+    ng-submit="saveSocialLink()"
+    method="post"
+    novalidate=""
+  >
+    <div class="inputGrp">
+      <label>Facebook </label>
+      <div class="inputBox">
+        <input
+          type="text"
+          name="facebook"
+          ng-model="form.facebook"
+          class="form-control ng-pristine ng-untouched ng-not-empty ng-valid ng-valid-required"
+          required=""
+          placeholder="Facebook"
+        />
+      </div>
+    </div>
+    <div class="inputGrp">
+      <label>Google </label>
+      <div class="inputBox">
+        <input
+          type="text"
+          name="google"
+          ng-model="form.google"
+          class="form-control ng-pristine ng-untouched ng-not-empty ng-valid ng-valid-required"
+          required=""
+          placeholder="Google"
+        />
+      </div>
+    </div>
+    <div class="inputGrp">
+      <label>Twitter </label>
+      <div class="inputBox">
+        <input
+          type="text"
+          name="twitter"
+          ng-model="form.twitter"
+          class="form-control ng-pristine ng-untouched ng-not-empty ng-valid ng-valid-required"
+          ng-match="email"
+          required=""
+          placeholder="Twitter"
+        />
+      </div>
+    </div>
+    <div class="inputGrp">
+      <label>Youtube </label>
+      <div class="inputBox">
+        <input
+          type="text"
+          name="youtube"
+          ng-model="form.youtube"
+          class="form-control ng-pristine ng-untouched ng-not-empty ng-valid ng-valid-required"
+          ng-match="email"
+          required=""
+          placeholder="Youtube"
+        />
+      </div>
+    </div>
+    <div>
+      <div class="offset-sm-3 col-sm-9">
+        <button
+          ng-if="subscriptionPermission == 1"
+          type="submit"
+          ng-disabled="editemail.$invalid"
+          mat-stroked-button
+          color="primary"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

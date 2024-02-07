@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-content
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    "
+  >
+    <h3>&nbsp;Students</h3>
+    
+    <mat-card-content style="display: flex; gap: 1rem">
+      <!-- <mat-form-field> -->
+      <input
+        matInput
+        placeholder="Search by Students name..."
+        #input
+        type="text"
+        name="table_search"
+        ng-model="searchText"
+        placeholder="Search"
+      />
+      <button (click)="toggleStudentsModal()" mat-raised-button color="primary">
+          <mat-icon
+          [ngStyle]="{ color: 'white' }"
+          aria-hidden="false"
+          aria-label="Example addcircle icon"
+          fontIcon="addcircle"
+          ></mat-icon>
+          Add Student
+      </button>
+      <!-- </mat-form-field> -->
+     
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="studentsList?.length > 0">
+  <app-mat-tablelist
+  [AllTableData]="studentsList"
+  [dataColumns]="studensDataColumns"
+  >
+  </app-mat-tablelist>
+</ng-container>

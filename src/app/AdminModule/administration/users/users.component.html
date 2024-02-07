@@ -1,0 +1,8 @@
+<div *ngIf="AllUsersList?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllUsersList"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{component: 'Administrators',}"
+  ></app-mat-tablelist>
+</div>
+

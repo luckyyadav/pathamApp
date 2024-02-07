@@ -1,0 +1,247 @@
+<mat-card>
+  <mat-card-content
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    "
+  >
+    <h3>&nbsp;Classes</h3>
+
+    <mat-card-content style="display: flex; gap: 1rem">
+      <!-- <mat-form-field> -->
+      <input
+        matInput
+        placeholder="Search by Company Item name,Created by Type...."
+        #input
+        type="text"
+        (keyup)="applyFilter($event)"
+        name="table_search"
+        ng-model="searchText"
+        placeholder="Search"
+      />
+
+      <button (click)="toggleClassesModal()" mat-raised-button color="primary">
+        <mat-icon
+          [ngStyle]="{ color: 'white' }"
+          aria-hidden="false"
+          aria-label="addcircle icon"
+          fontIcon="addcircle"
+        ></mat-icon>
+        Class
+      </button>
+      <!-- </mat-form-field> -->
+      <c-modal
+        id="classesModal"
+        [visible]="visible"
+        (visibleChange)="handleClassesModalChange($event)"
+        size="lg"
+      >
+        <c-modal-header>
+          <h5 cModalTitle>Add Class</h5>
+          <button (click)="toggleClassesModal()" cButtonClose></button>
+        </c-modal-header>
+        <c-modal-body>
+          <!-- Modal Form -->
+          <form
+            cForm
+            [formGroup]="classesForm"
+            [gutter]="3"
+            cForm
+            cRow
+            novalidate
+            (ngSubmit)="onSubmit()"
+          >
+            <c-col [md]="4" *ngIf="classesForm.controls['course_id'] as ctrl">
+              <label class="label w-100" for="course">Course *</label>
+              <select
+                aria-label="Default select"
+                cSelect
+                id="course"
+                formControlName="course_id"
+                required
+                [autofocus]="true"
+                class="mb-3"
+                [valid]="
+                  ctrl.touched && ctrl.valid
+                    ? true
+                    : (submitted || ctrl.touched) && ctrl.invalid
+                    ? false
+                    : undefined
+                "
+              >
+                <option value="">Open this select menu</option>
+                <option *ngFor="let course of AllCourses" [ngValue]="course.id">
+                  {{ course.course_name }}
+                </option>
+              </select>
+              <c-form-feedback
+                *ngIf="submitted || ctrl.invalid"
+                [valid]="!(submitted || ctrl.invalid)"
+              >
+                <ng-container *ngIf="ctrl.errors as errors">
+                  <div *ngIf="errors['required']">Course is required</div>
+                </ng-container>
+              </c-form-feedback>
+            </c-col>
+
+            <c-col
+              [md]="4"
+              *ngIf="classesForm.controls['department_id'] as ctrl"
+            >
+              <label class="label w-100" for="department">Department *</label>
+              <select
+                aria-label="Default select"
+                cSelect
+                id="department"
+                formControlName="department_id"
+                required
+                [autofocus]="true"
+                class="mb-3"
+                [valid]="
+                  ctrl.touched && ctrl.valid
+                    ? true
+                    : (submitted || ctrl.touched) && ctrl.invalid
+                    ? false
+                    : undefined
+                "
+              >
+                <option value="">Open this select menu</option>
+                <option
+                  *ngFor="let department of coursesDepartment"
+                  [ngValue]="department.id"
+                >
+                  {{ department.department_name }}
+                </option>
+              </select>
+              <c-form-feedback
+                *ngIf="submitted || ctrl.invalid"
+                [valid]="!(submitted || ctrl.invalid)"
+              >
+                <ng-container *ngIf="ctrl.errors as errors">
+                  <div *ngIf="errors['required']">Department is required</div>
+                </ng-container>
+              </c-form-feedback>
+            </c-col>
+
+            <c-col [md]="4" *ngIf="classesForm.controls['className'] as ctrl">
+              <label cLabel for="className">Class Name *</label>
+              <input
+                cFormControl
+                id="className"
+                formControlName="className"
+                placeholder="Class Name"
+                autocomplete="off"
+                [valid]="
+                  ctrl.touched && ctrl.valid
+                    ? true
+                    : (submitted || ctrl.touched) && ctrl.invalid
+                    ? false
+                    : undefined
+                "
+              />
+              <c-form-feedback
+                *ngIf="submitted || ctrl.invalid"
+                [valid]="!(submitted || ctrl.invalid)"
+              >
+                <ng-container *ngIf="ctrl.errors as errors">
+                  <div *ngIf="errors['required']">Class Name is required</div>
+                </ng-container>
+              </c-form-feedback>
+            </c-col>
+
+            <c-col
+              [md]="4"
+              *ngIf="classesForm.controls['class_start_date'] as ctrl"
+            >
+              <label cLabel for="classStartDate">Class Start Date</label>
+              <input
+                cFormControl
+                type="date"
+                id="classStartDate"
+                formControlName="class_start_date"
+                placeholder="dd-mm-yy"
+                autocomplete="off"
+              />
+            </c-col>
+
+            <c-col
+              [md]="4"
+              *ngIf="classesForm.controls['class_end_date'] as ctrl"
+            >
+              <label cLabel for="classEndDate">Class End Date *</label>
+              <input
+                cFormControl
+                type="date"
+                id="classEndDate"
+                formControlName="class_end_date"
+                placeholder="dd-mm-yy"
+                autocomplete="off"
+              />
+            </c-col>
+
+            <c-col [md]="4" *ngIf="classesForm.controls['board'] as ctrl">
+              <label class="label w-100" for="board">Board * 101</label>
+              <select
+                aria-label="Default select"
+                cSelect
+                id="board"
+                formControlName="board"
+                required
+                [autofocus]="true"
+                class="mb-3"
+                [valid]="
+                  ctrl.touched && ctrl.valid
+                    ? true
+                    : (submitted || ctrl.touched) && ctrl.invalid
+                    ? false
+                    : undefined
+                "
+              >
+                <option value="">Open this select menu</option>
+
+                <option *ngFor="let board of AllBoards" [value]="board.id">
+                  {{ board.display_name }} - {{ board.full_form }}
+                </option>
+              </select>
+              <c-form-feedback
+                *ngIf="submitted || ctrl.invalid"
+                [valid]="!(submitted || ctrl.invalid)"
+              >
+                <ng-container *ngIf="ctrl.errors as errors">
+                  <div *ngIf="errors['required']">Board is required</div>
+                </ng-container>
+              </c-form-feedback>
+            </c-col>
+
+            <hr />
+            <c-col [xs]="12">
+              <c-button-group>
+                <button mat-raised-button color="primary">Submit</button>
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  mat-raised-button
+                  color="accent"
+                >
+                  Reset
+                </button>
+              </c-button-group>
+            </c-col>
+          </form>
+
+          <!--  -->
+        </c-modal-body>
+      </c-modal>
+    </mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+<ng-container *ngIf="dataSource?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="dataSource"
+    [dataColumns]="classDataColumns"
+  >
+  </app-mat-tablelist>
+</ng-container>

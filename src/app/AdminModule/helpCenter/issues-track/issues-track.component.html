@@ -1,0 +1,10 @@
+<div *ngIf="AllIssuesTrack?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllIssuesTrack"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{
+            component: 'Help Center: Issues Track',
+           
+          }"
+  ></app-mat-tablelist>
+</div>

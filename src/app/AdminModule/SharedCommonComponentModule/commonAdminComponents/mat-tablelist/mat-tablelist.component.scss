@@ -1,0 +1,33 @@
+.mat-mdc-form-field {
+    width: 100%;
+}
+th.mdc-data-table__header-cell {
+    color: #000;
+    background-color: #3f51b5;
+    color: #fff;
+    }
+
+
+    .mat-table {
+        overflow-x: scroll;
+    }
+    
+    .mat-row,
+    .mat-header-row {
+        min-width: 800px;
+    }
+    table {
+        width: 100%;
+      }
+
+.button_wrapper{display: flex;}
+      
+.togglrBTN {
+    transform: scale(0.7); /* Adjust the scale factor as needed */
+  }
+  
+  /* Optional: Adjust the label font size to match the smaller toggle */
+  .togglrBTN .mat-slide-toggle-label-content {
+    font-size: 12px; /* Adjust the font size as needed */
+  }
+   

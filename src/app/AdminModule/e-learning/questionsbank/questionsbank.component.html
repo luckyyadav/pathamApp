@@ -1,0 +1,9 @@
+<div *ngIf="allQuestionBank?.length > 0">
+    <app-mat-tablelist
+      [AllTableData]="allQuestionBank"
+      [dataColumns]="questionbankDataColumns"
+      [componentDetails]="{
+          component: 'Questions Bank',
+        }"
+    ></app-mat-tablelist>
+</div>

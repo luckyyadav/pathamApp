@@ -1,0 +1,9 @@
+<div *ngIf="allLiveClasses?.length > 0">
+    <app-mat-tablelist
+      [AllTableData]="allLiveClasses"
+      [dataColumns]="liveclassesDataColumns"
+      [componentDetails]="{
+          component: 'Live Classes',
+        }"
+    ></app-mat-tablelist>
+</div>

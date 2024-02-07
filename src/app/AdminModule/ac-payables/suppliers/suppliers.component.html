@@ -1,0 +1,590 @@
+<div class="row">
+  <div class="col-md-12">
+    <!--  <button    mat-raised-button color="primary">
+      <mat-icon
+        [ngStyle]="{ color: 'white' }"
+        aria-hidden="false"
+        aria-label="Example addcircle icon"
+        fontIcon="addcircle"
+      ></mat-icon>
+      Supplier
+    </button> -->
+    <c-modal
+      id="supplierModal"
+      [visible]="visible"
+      (visibleChange)="handleSupplierModalChange($event)"
+      size="lg"
+    >
+      <c-modal-header>
+        <h5 cModalTitle>Add New Supplier</h5>
+        <button (click)="toggleSupplierModal()" cButtonClose></button>
+      </c-modal-header>
+      <c-modal-body>
+        <!-- Modal Form -->
+        <form
+          cForm
+          [formGroup]="supplierForm"
+          [gutter]="3"
+          cForm
+          cRow
+          novalidate
+          (ngSubmit)="onSubmit()"
+        >
+          <c-col [md]="4" *ngIf="supplierForm.controls['companyName'] as ctrl">
+            <label cLabel for="companyName">Company Name</label>
+            <input
+              cFormControl
+              id="companyName"
+              formControlName="companyName"
+              placeholder="Enter Company Name"
+              autocomplete="off"
+              required
+              [autofocus]="true"
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Company Name is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['gstNo'] as ctrl">
+            <label cLabel for="gstNo">GST No.</label>
+            <input
+              cFormControl
+              id="gstNo"
+              formControlName="gstNo"
+              placeholder="GST No. of Company"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">GST No. is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['panNo'] as ctrl">
+            <label cLabel for="panNo">PAN No.</label>
+            <input
+              cFormControl
+              id="panNo"
+              formControlName="panNo"
+              placeholder="Pan No. of Company"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">PAN No. is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['address'] as ctrl">
+            <label cLabel for="address">Address</label>
+            <input
+              cFormControl
+              id="address"
+              formControlName="address"
+              placeholder="Enter Company Address"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Address is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['state'] as ctrl">
+            <label cLabel for="state">State</label>
+            <input
+              cFormControl
+              id="state"
+              formControlName="state"
+              placeholder=""
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">State is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['district'] as ctrl">
+            <label cLabel for="district">District</label>
+            <input
+              cFormControl
+              id="district"
+              formControlName="district"
+              placeholder="Enter District Name"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">District is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['pinCode'] as ctrl">
+            <label cLabel for="pinCode">Pin code</label>
+            <input
+              cFormControl
+              id="pinCode"
+              formControlName="pinCode"
+              placeholder="Enter pincode"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Pin Code is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['mobileNo'] as ctrl">
+            <label cLabel for="mobileNo">Mobile No.</label>
+            <input
+              cFormControl
+              id="mobileNo"
+              formControlName="mobileNo"
+              placeholder="Enter Mobile Number"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Mobile No. is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['phoneNo'] as ctrl">
+            <label cLabel for="phoneNo">Phone No.</label>
+            <input
+              cFormControl
+              id="phoneNo"
+              formControlName="phoneNo"
+              placeholder="Enter Phone Number"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Phone Number is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['faxNo'] as ctrl">
+            <label cLabel for="faxNo">Fax No.</label>
+            <input
+              cFormControl
+              id="faxNo"
+              formControlName="faxNo"
+              placeholder="Enter fax Number"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Fax No. is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col
+            [md]="4"
+            *ngIf="supplierForm.controls['companyWebsite'] as ctrl"
+          >
+            <label cLabel for="companyWebsite">Company website</label>
+            <input
+              cFormControl
+              id="companyWebsite"
+              formControlName="companyWebsite"
+              placeholder="Company website URL"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">
+                  Company website is required
+                </div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['email'] as ctrl">
+            <label cLabel for="email">Email</label>
+            <input
+              cFormControl
+              id="email"
+              formControlName="email"
+              placeholder="Supplier Email Id"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Email is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col
+            [md]="4"
+            *ngIf="supplierForm.controls['contactPerson'] as ctrl"
+          >
+            <label cLabel for="contactPerson">Contact Person</label>
+            <input
+              cFormControl
+              id="contactPerson"
+              formControlName="contactPerson"
+              placeholder="Contact Person name"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Contact Person is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['contactNo'] as ctrl">
+            <label cLabel for="contactNo">Contact No.</label>
+            <input
+              cFormControl
+              id="contactNo"
+              formControlName="contactNo"
+              placeholder="Enter Contact Number"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Contact No. is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['designation'] as ctrl">
+            <label cLabel for="designation">Designation</label>
+            <input
+              cFormControl
+              id="designation"
+              formControlName="designation"
+              placeholder="Designation of contact person"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Designation is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['categories'] as ctrl">
+            <label cLabel for="categories">Categories</label>
+            <input
+              cFormControl
+              id="categories"
+              formControlName="categories"
+              placeholder=""
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Categories is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['notes'] as ctrl">
+            <label cLabel for="notes">Notes *</label>
+            <input
+              cFormControl
+              id="notes"
+              formControlName="notes"
+              placeholder="Brief description about Company"
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Notes is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-col [md]="4" *ngIf="supplierForm.controls['contract'] as ctrl">
+            <label cLabel for="contract">Contract</label>
+            <input
+              cFormControl
+              id="contract"
+              formControlName="contract"
+              placeholder=""
+              autocomplete="off"
+              required
+              [valid]="
+                ctrl.touched && ctrl.valid
+                  ? true
+                  : (submitted || ctrl.touched) && ctrl.invalid
+                  ? false
+                  : undefined
+              "
+            />
+            <c-form-feedback
+              *ngIf="submitted || ctrl.invalid"
+              [valid]="!(submitted || ctrl.invalid)"
+            >
+              <ng-container *ngIf="ctrl.errors as errors">
+                <div *ngIf="errors['required']">Contract is required</div>
+              </ng-container>
+            </c-form-feedback>
+          </c-col>
+
+          <c-row class="mb-1">
+            <c-col *ngIf="supplierForm.controls['accept'] as ctrl">
+              <c-form-check>
+                <input
+                  cFormCheckInput
+                  type="checkbox"
+                  id="accept"
+                  formControlName="accept"
+                  required
+                  [valid]="
+                    ctrl.valid
+                      ? true
+                      : submitted && ctrl.invalid
+                      ? false
+                      : undefined
+                  "
+                />
+                <label cFormCheckLabel custom for="accept"
+                  >I accept the terms of use</label
+                >
+                <c-form-feedback
+                  *ngIf="submitted && ctrl.invalid"
+                  [valid]="false"
+                >
+                  <ng-container *ngIf="ctrl.errors as errors">
+                    <div *ngIf="errors['required']">
+                      You have to accept our Terms and Conditions
+                    </div>
+                  </ng-container>
+                </c-form-feedback>
+              </c-form-check>
+            </c-col>
+          </c-row>
+
+          <c-col [xs]="12">
+            <c-button-group>
+              <button (click)="onSubmit()" mat-raised-button color="primary">
+                Submit
+              </button>
+              <button (click)="onReset()" mat-raised-button color="accent">
+                Reset
+              </button>
+            </c-button-group>
+          </c-col>
+        </form>
+
+        <!--  -->
+      </c-modal-body>
+    </c-modal>
+    <hr />
+  </div>
+</div>
+
+<div *ngIf="supplierAll?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="supplierAll"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{
+      component: 'Suppliers',
+      addProgramBtn: 'Add Suppliers'
+    }"
+  ></app-mat-tablelist>
+</div>

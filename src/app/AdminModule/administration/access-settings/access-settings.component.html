@@ -1,0 +1,8 @@
+<div *ngIf="AllAccessSettingList?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllAccessSettingList"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{component: 'Administrative Tasks',}"
+  ></app-mat-tablelist>
+</div>
+

@@ -1,0 +1,10 @@
+<div *ngIf="AllDiaries?.length > 0">
+  <app-mat-tablelist
+    [AllTableData]="AllDiaries"
+    [dataColumns]="dataColumns"
+    [componentDetails]="{
+      component: 'Diary',
+      addProgramBtn: 'Add Diary'
+    }"
+  ></app-mat-tablelist>
+</div>

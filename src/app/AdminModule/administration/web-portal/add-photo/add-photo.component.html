@@ -1,0 +1,44 @@
+<div class="schoolTitle">
+  <div class="row">
+    <div class="col-md-8">
+      <h4 class="card-title ng-binding">School Add Photo</h4>
+    </div>
+  </div>
+</div>
+
+<div class="inputContainer">
+  <h5>School Photo</h5>
+  <input
+    style="border: 1px solid black; padding: 0.2rem"
+    type="file"
+    accept="image/gif, image/jpg, image/jpeg, image/png"
+  />
+</div>
+
+<div class="logoContainer"></div>
+
+<div class="photoList">
+  <table>
+    <thead>
+      <tr class="listHeader">
+        <th>Added Photo</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let photo of AllPhotList">
+      <tr>
+        <td>
+          <img
+            [src]="'https://www.paatham.in/lms/uploads/schools/' + photo.photo"
+          />
+          {{ photo.photo }}
+        </td>
+        <td>Delete</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<button mat-stroked-button color="primary" ng-click="open_add_item_group();">
+  Save
+</button>

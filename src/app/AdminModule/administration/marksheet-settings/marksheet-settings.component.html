@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-content>
+    <button
+      mat-stroked-button
+      [color]="btnType === 'setting' ? 'primary' : 'secondary'"
+      (click)="btnType = 'setting'"
+    >
+      Setting
+    </button>
+    <button
+      mat-stroked-button
+      [color]="btnType === 'record' ? 'primary' : 'secondary'"
+      (click)="btnType = 'record'"
+    >
+      Record
+    </button>
+  </mat-card-content>
+  <mat-card-content *ngIf="btnType === 'setting'" style="margin-top: 1rem">
+    <p>
+      If your institution allows markings in partial numbers such as 1/2 or 1/4
+      or 8.5, or 6.75, you must check the options below. [ ] Decimal number
+      marks at allowed to [Dropdown of 1, 2 and 3] places of decimal Based on
+      the decimal places selected above, you must provide ranges that covers all
+      numbers between 0 and 100. For example, if you have selected 1 place of
+      decimal your ranges should must include 79.5, 80.9 etc. Similarly, if you
+      have selected 2 places of decimal, your ranges must include 79.55, 88.75
+      etc.
+    </p>
+    <label>Decimal Allowed?:</label>
+  </mat-card-content>
+
+  <!-- <div *ngIf="btnType == 'record'">
+    <app-mat-tablelist
+      [AllTableData]="AllCertificateList"
+      [dataColumns]="dataColumns"
+      [componentDetails]="{component: 'Certificates',
+    
+    }"
+    ></app-mat-tablelist>
+  </div> -->
+</mat-card>
